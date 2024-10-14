@@ -26,7 +26,7 @@ jobs:
       # Store the LinkedIn cookies JSON securely in a file
       - name: Export LinkedIn Cookies from Secret
         run: |
-          echo "${{ secrets.LINKEDIN_COOKIES_JSON }}" > linkedin_cookies.json
+          echo "${{ secrets.LINKEDIN_COOKIES }}" > linkedin_cookies.json
 
       - name: Run Playwright scraper
         run: |
