@@ -7,7 +7,7 @@ class PlaywrightDriver:
 
     def initialize_driver(self):
         playwright = sync_playwright().start()
-        browser = playwright.chromium.launch(headless=False)
+        browser = playwright.chromium.launch(headless=True)
         context = browser.new_context()
 
         if self.cookies_file:
