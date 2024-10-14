@@ -33,4 +33,3 @@ def run_scraper():
 
 while True:
     run_scraper()
-    time.sleep(60 * 60 * 6)
