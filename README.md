@@ -32,10 +32,10 @@ If running locally, save them in a file named linkedin_cookies.json (this file i
 ## Usage
 
 To run the scraper locally, simply execute:
-
+ ```python
 python main.py
 
-The script will:
+##### The script will:
 
 Open LinkedIn using Playwright (headless mode).
 Scrape the follower counts for the specified accounts and pages.
@@ -43,7 +43,7 @@ Submit the data to a pre-configured Google Form.
 Scheduling with GitHub Actions
 The scraper is set up to run automatically every 6 hours using GitHub Actions.
 
-Ensure you have set up your repository secrets:
+**Ensure you have set up your repository secrets:**
 LINKEDIN_COOKIES_JSON: Your LinkedIn cookies in JSON format.
 GitHub Actions will:
 Run the scraper every 6 hours.
