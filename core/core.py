@@ -1,8 +1,8 @@
 import time as t
 from bs4 import BeautifulSoup
 import pandas as pd
-from LinkedIn import NormalPageView as NPV
-from LinkedIn import ProfileView as PV
+from _selectors.LinkedIn import NormalPageView as NPV
+from _selectors.LinkedIn import ProfileView as PV
 
 class InfoParser:
     def __init__(self, context):
