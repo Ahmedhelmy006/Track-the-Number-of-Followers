@@ -37,20 +37,22 @@ To run the scraper locally, simply execute:
 ```
 ##### The script will:
 
-Open LinkedIn using Playwright (headless mode).
-Scrape the follower counts for the specified accounts and pages.
-Submit the data to a pre-configured Google Form.
-Scheduling with GitHub Actions
-The scraper is set up to run automatically every 6 hours using GitHub Actions.
+- Open LinkedIn using Playwright (headless mode).
+- Scrape the follower counts for the specified accounts and pages.
+- Submit the data to a pre-configured Google Form.
+- Scheduling with GitHub Actions
+- The scraper is set up to run automatically every 6 hours using GitHub Actions.
 
 **Ensure you have set up your repository secrets:**
-LINKEDIN_COOKIES_JSON: Your LinkedIn cookies in JSON format.
-GitHub Actions will:
-Run the scraper every 6 hours.
-Submit the scraped data to Google Form.
-Store the logs in the Actions tab for monitoring.
-Storing Sensitive Information
-Sensitive information such as LinkedIn session cookies are securely stored using GitHub Secrets. Do not commit sensitive data like cookies or API keys to the repository.
+
+
+- LINKEDIN_COOKIES_JSON: Your LinkedIn cookies in JSON format.
+- GitHub Actions will:
+- Run the scraper every 6 hours.
+- Submit the scraped data to Google Form.
+- Store the logs in the Actions tab for monitoring.
+- Storing Sensitive Information
+- Sensitive information such as LinkedIn session cookies are securely stored using GitHub Secrets. Do not commit sensitive data like cookies or API keys to the repository.
 
 For more details on how to set up GitHub Secrets, refer to the official GitHub documentation.
 
@@ -66,7 +68,7 @@ Feel free to contribute by submitting a pull request or opening an issue. Contri
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Example Workflow (GitHub Actions)
-Here’s a brief description of the GitHub Actions workflow used in this project:
+**Here’s a brief description of the GitHub Actions workflow used in this project:**
 
-### Run Frequency: Every 6 hours
-### Environment: Ubuntu-latest with Python 3.12 and Playwright installed.
+-Run Frequency: Every 6 hours
+-Environment: Ubuntu-latest with Python 3.12 and Playwright installed.
