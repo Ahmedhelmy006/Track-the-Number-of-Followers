@@ -1,6 +1,7 @@
 name: Playwright Scraper
 
 on:
+  workflow_dispatch:  # This allows manual runs
   schedule:
     - cron: '0 */6 * * *'
 
