@@ -1,6 +1,7 @@
 name: Playwright Scraper
 
 on:
+  workflow_dispatch:  # This allows manual runs
   schedule:
     - cron: '0 */6 * * *'
 
@@ -30,4 +31,4 @@ jobs:
 
       - name: Run Playwright scraper
         run: |
-          python main.py
+          python core/main.py
