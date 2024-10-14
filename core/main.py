@@ -2,6 +2,7 @@ from PlaywrightDriver import PlaywrightDriver
 from core import FollowersTracker
 import GoogleFormsSubmitter
 import time
+import sys
 
 def run_scraper(): 
     driver_instance = PlaywrightDriver(cookies_file='json.json')
@@ -29,7 +30,6 @@ def run_scraper():
     form_submitter = GoogleFormsSubmitter.GoogleFormsSubmitter(form_url, form_fields)
     form_submitter.submit_data(mapped_data)
 
-    driver_instance.close(context)
-
 while True:
     run_scraper()
+    sys.exit()
