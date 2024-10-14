@@ -19,4 +19,3 @@ class PlaywrightDriver:
 
     def close(self, context):
         context.close()
-        self.browser().close()
