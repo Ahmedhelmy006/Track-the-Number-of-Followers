@@ -1,14 +1,14 @@
+import asyncio
 from PlaywrightDriver import PlaywrightDriver
 from core import FollowersTracker
 import GoogleFormsSubmitter
-import time
 
-def run_scraper(): 
+async def run_scraper(): 
     driver_instance = PlaywrightDriver(cookies_file='json.json')
-    context = driver_instance.initialize_driver()
+    context = await driver_instance.initialize_driver()
+    
     tracker = FollowersTracker(context, r'input files/Accounts.xlsx', r'input files/Pages.xlsx')
-
-    followers_data = tracker.scrap_info()
+    followers_data = await tracker.scrap_info()
 
     form_url = 'https://docs.google.com/forms/d/e/1FAIpQLSeK_A8x_7ipnICGwK3k3MdTq3vGhXwfu9BhSz37Bgz27T1llw/formResponse'
     
@@ -27,9 +27,14 @@ def run_scraper():
     }
 
     form_submitter = GoogleFormsSubmitter.GoogleFormsSubmitter(form_url, form_fields)
-    form_submitter.submit_data(mapped_data)
+    await form_submitter.submit_data(mapped_data)
 
-    driver_instance.close(context)
+    await driver_instance.close(context)
 
-while True:
-    run_scraper()
+async def main():
+    while True:
+        await run_scraper()
+        await asyncio.sleep(6 * 60 * 60)  # Wait for 6 hours between each run
+
+if __name__ == "__main__":
+    asyncio.run(main())
