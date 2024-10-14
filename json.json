@@ -1,41 +1,41 @@
 [
     {
         "domain": ".www.linkedin.com",
-        "expirationDate": 1760452634.92117,
+        "expirationDate": 1760458768.080843,
         "hostOnly": false,
         "httpOnly": true,
         "name": "li_at",
         "path": "/",
-        "sameSite": "Lax",
+        "sameSite": "no_restriction",
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "AQEDAS3j2yEFTKXwAAABkot2PgsAAAGSr4LCC1YAciqAMVVWttmdHQEkkXNn8BeMn5e2kDbgvdNd_WLa_3ViZ9WEcFGR5gWVleOHPKyhxIs52BSzWRVvIGEeXSzzBEsDsxMa7gCvyWQwOgeuSbYXowBj"
+        "value": "AQEDAS3j2yEC504UAAABkovT1FYAAAGSr-BYVlYAUCL_lTjIG0KLX9qXQxoPt8oXqjsYzjIs6lKpaiW6IVo3tjrx4__4lV21r5Yt2KPtIRt5AhLM9Z98p3576vjZ5pvLvZ_yOO60z8D5NwBysw1PqyV0"
     },
     {
         "domain": ".www.linkedin.com",
-        "expirationDate": 1760452634.921052,
-        "hostOnly": false,
-        "httpOnly": true,
-        "name": "li_rm",
-        "path": "/",
-        "sameSite": "Lax",
-        "secure": true,
-        "session": false,
-        "storeId": null,
-        "value": "AQGpQym2crwN8QAAAZFrJLRGx99_dKrc1cFsabi2txBQUaO7vbGf3ti_fAU7NxLYXDhPk7nxNQmiYZRi8azc_7lW4q2TRFlKIuBPbv8aRGq1mEwih7A3qAvZ"
-    },
-    {
-        "domain": ".www.linkedin.com",
-        "expirationDate": 1736692634.921216,
+        "expirationDate": 1736698768.080871,
         "hostOnly": false,
         "httpOnly": false,
         "name": "JSESSIONID",
         "path": "/",
-        "sameSite": "Lax",
+        "sameSite": "no_restriction",
         "secure": true,
         "session": false,
         "storeId": null,
         "value": "\"ajax:0663162558110969155\""
+    },
+    {
+        "domain": ".www.linkedin.com",
+        "expirationDate": 1760458768.080705,
+        "hostOnly": false,
+        "httpOnly": true,
+        "name": "li_rm",
+        "path": "/",
+        "sameSite": "no_restriction",
+        "secure": true,
+        "session": false,
+        "storeId": null,
+        "value": "AQGpQym2crwN8QAAAZFrJLRGx99_dKrc1cFsabi2txBQUaO7vbGf3ti_fAU7NxLYXDhPk7nxNQmiYZRi8azc_7lW4q2TRFlKIuBPbv8aRGq1mEwih7A3qAvZ"
     }
 ]
