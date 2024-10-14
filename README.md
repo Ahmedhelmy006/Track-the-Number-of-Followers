@@ -34,7 +34,7 @@ If running locally, save them in a file named linkedin_cookies.json (this file i
 To run the scraper locally, simply execute:
  ```python
    python main.py
-
+```
 ##### The script will:
 
 Open LinkedIn using Playwright (headless mode).
