@@ -1,5 +1,6 @@
-import pandas as pd
+import time as t
 from bs4 import BeautifulSoup
+import pandas as pd
 from LinkedIn import NormalPageView as NPV
 from LinkedIn import ProfileView as PV
 
@@ -7,14 +8,14 @@ class InfoParser:
     def __init__(self, context):
         self.context = context
 
-    async def scrap_info(self, link):
-        page = await self.context.new_page() 
-        await page.goto(link) 
-        await page.wait_for_timeout(2000)  
+    def scrap_info(self, link):
+        page = self.context.new_page()
+        page.goto(link)
+        page.wait_for_timeout(2000)  # Wait for the page to load
 
-        html_content = await page.content()  
+        html_content = page.content()  # Get the page source
         soup = BeautifulSoup(html_content, 'html.parser')
-        await page.close()  
+        page.close()
         return self._parse_info(soup)
 
 class AccountInfoParser(InfoParser):
@@ -32,6 +33,7 @@ class PageInfoParser(InfoParser):
             return FollowersTracker.clean_text(number_of_followers.get_text(strip=True))
         return 'Not Found'
 
+
 class FollowersTracker:
     def __init__(self, context, accounts_file, pages_file):
         self.context = context
@@ -46,7 +48,7 @@ class FollowersTracker:
         page_links = self.pages['Link'].tolist()
         return account_links, page_links
 
-    async def scrap_info(self):
+    def scrap_info(self):
         account_parser = AccountInfoParser(self.context)
         page_parser = PageInfoParser(self.context)
 
@@ -55,11 +57,12 @@ class FollowersTracker:
         followers_data = []
 
         for link in account_links:
-            info = await account_parser.scrap_info(link) 
+            info = account_parser.scrap_info(link)
+            followers_data.append(info)
             print(f"Account info: {info}")
 
         for link in page_links:
-            info = await page_parser.scrap_info(link) 
+            info = page_parser.scrap_info(link)
             followers_data.append(info)
             print(f"Page info: {info}")
 
