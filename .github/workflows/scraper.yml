@@ -31,4 +31,4 @@ jobs:
 
       - name: Run Playwright scraper
         run: |
-          python main.py
+          python core/main.py
