@@ -14,8 +14,8 @@ jobs:
 
       - name: Download Chrome Profile
         run: |
-          wget -O chrome-profile.zip https://drive.google.com/file/d/1J9Zjq2RYq6ojuCL6KwwGKUKMePABOowJ/view?usp=sharing
-          unzip chrome-profile.zip -d ./chrome-profile
+          wget -O chrome-profile https://drive.google.com/file/d/1J9Zjq2RYq6ojuCL6KwwGKUKMePABOowJ/view?usp=sharing
+          unzip chrome-profile -d ./chrome-profile
 
       - name: Run scraper
         run: |
