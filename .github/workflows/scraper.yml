@@ -24,11 +24,6 @@ jobs:
           pip install -r requirements.txt
           playwright install
 
-      # Store the LinkedIn cookies JSON securely in a file
-      - name: Export LinkedIn Cookies from Secret
-        run: |
-          echo "${{ secrets.LINKEDIN_COOKIES}}" > linkedin_cookies.json
-
       - name: Run Playwright scraper
         run: |
           python core/main.py
