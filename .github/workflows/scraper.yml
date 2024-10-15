@@ -2,8 +2,8 @@ name: Run Playwright with Chrome Profile
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '*/10 * * * *'  # Every 10 minutes
+  #schedule:
+  #  - cron: '*/10 * * * *'  # Every 10 minutes
 
 jobs:
   run-scraper:
@@ -14,7 +14,7 @@ jobs:
 
       - name: Download Chrome Profile
         run: |
-          wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1J9Zjq2RYq6ojuCL6KwwGKUKMePABOowJ' -O chrome-profile.zip
+          wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1--tDh_fwYDXiRZMQufAVSUDJtGLwIVi0 -O chrome-profile.zip
           jar xvf chrome-profile.zip -d ./chrome-profile
 
 
