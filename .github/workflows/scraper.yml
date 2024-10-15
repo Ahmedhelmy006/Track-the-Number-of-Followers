@@ -11,6 +11,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
+      - name: Install gdown
+        run: |
+          pip install gdown
 
       - name: Download Chrome Profile using gdown
         run: |
