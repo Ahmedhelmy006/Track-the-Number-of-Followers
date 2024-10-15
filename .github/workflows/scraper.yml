@@ -12,9 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Download Chrome Profile
+      - name: Download Chrome Profile using gdown
         run: |
-          wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1--tDh_fwYDXiRZMQufAVSUDJtGLwIVi0' -O chrome-profile.zip
+          gdown --id 1--tDh_fwYDXiRZMQufAVSUDJtGLwIVi0 -O chrome-profile.zip
           unzip chrome-profile.zip -d ./chrome-profile
 
       - name: Install dependencies
