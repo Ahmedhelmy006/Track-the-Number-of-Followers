@@ -21,14 +21,13 @@ jobs:
           gdown --id 1--tDh_fwYDXiRZMQufAVSUDJtGLwIVi0 -O chrome-profile.zip
           unzip chrome-profile.zip -d ./chrome-profile
 
-      - name: Install Playwright browsers
-        run: |
-          playwright install
-
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-
+          
+      - name: Install Playwright browsers
+        run: |
+          playwright install
       - name: Run scraper
         run: |
           python core/main.py
