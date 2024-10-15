@@ -2,8 +2,8 @@ name: Run Playwright with Chrome Profile
 
 on:
   workflow_dispatch:
-  #schedule:
-  #  - cron: '*/10 * * * *'  # Every 10 minutes
+  schedule:
+    - cron: '*/10 * * * *'  # Every 10 minutes
 
 jobs:
   run-scraper:
@@ -12,17 +12,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install gdown
+      - name: Download Chrome Profile
         run: |
-          pip install gdown
-
-      - name: Download Chrome Profile using gdown
-        run: |
-          gdown --id 1--tDh_fwYDXiRZMQufAVSUDJtGLwIVi0 -O chrome-profile.zip
+          wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1--tDh_fwYDXiRZMQufAVSUDJtGLwIVi0' -O chrome-profile.zip
           unzip chrome-profile.zip -d ./chrome-profile
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
 
       - name: Run scraper
         run: |
           python core/main.py
         env:
           PLAYWRIGHT_BROWSERS_PATH: 0
+          CHROME_PROFILE_DIR: './chrome-profile'
