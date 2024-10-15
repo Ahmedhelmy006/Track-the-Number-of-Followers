@@ -12,10 +12,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Download Chrome Profile
+      - name: Install gdown
         run: |
-          wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1--tDh_fwYDXiRZMQufAVSUDJtGLwIVi0' -O chrome-profile.zip
-          jar xvf chrome-profile.zip -d ./chrome-profile
+          pip install gdown
+
+      - name: Download Chrome Profile using gdown
+        run: |
+          gdown --id 1--tDh_fwYDXiRZMQufAVSUDJtGLwIVi0 -O chrome-profile.zip
+          unzip chrome-profile.zip -d ./chrome-profile
 
       - name: Run scraper
         run: |
