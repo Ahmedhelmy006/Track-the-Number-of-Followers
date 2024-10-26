@@ -94,7 +94,7 @@ class FollowersTracker:
         info = parser.scrap_info(link)
         if info == 'Not Found' and retry:
             print("Info not found, attempting login...")
-            self.login(username= os.getenv("LINKEDIN_USERNAME"), os.getenv("LINKEDIN_PASSWORD"))
+            self.login()
             info = parser.scrap_info(link)
         return info
 
