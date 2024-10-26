@@ -4,7 +4,7 @@ import GoogleFormsSubmitter
 import time
 
 def run_scraper(): 
-    driver_instance = PlaywrightDriver(cookies_file='json.json')
+    driver_instance = PlaywrightDriver(cookies_file='cookies.json')
     context = driver_instance.initialize_driver()
     tracker = FollowersTracker(context, r'input files/Accounts.xlsx', r'input files/Pages.xlsx')
 
