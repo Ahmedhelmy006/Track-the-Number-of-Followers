@@ -59,10 +59,14 @@ class FollowersTracker:
     def _update_cookies_file(self):
         new_cookies = self.context.cookies()
         cleaned_cookies = CookiesCleaner.clean_cookies(new_cookies)
+    
         cookies_path = os.path.join(os.getcwd(), 'cookies.json')
+    
         with open(cookies_path, 'w') as file:
             json.dump(cleaned_cookies, file, indent=4)
+    
         print(f"Cookies updated at: {cookies_path}")
+
 
     def read_excel(self, file_path):
         return pd.read_excel(file_path)
