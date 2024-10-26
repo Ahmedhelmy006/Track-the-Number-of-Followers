@@ -10,16 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-        
-      - name: Install gdown
-        run: |
-          pip install gdown
-
-      - name: Download Chrome Profile using gdown
-        run: |
-          gdown --id 1--tDh_fwYDXiRZMQufAVSUDJtGLwIVi0 -O chrome-profile.zip
-          unzip chrome-profile.zip -d ./chrome-profile
+        uses: actions/checkout@v2        
 
       - name: Install dependencies
         run: |
