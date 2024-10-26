@@ -1,7 +1,7 @@
 [
     {
         "domain": ".www.linkedin.com",
-        "expirationDate": 1760458768.080843,
+        "expirationDate": 1761240317.893304,
         "hostOnly": false,
         "httpOnly": true,
         "name": "li_at",
@@ -10,11 +10,11 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "AQEDAS3j2yEC504UAAABkovT1FYAAAGSr-BYVlYAUCL_lTjIG0KLX9qXQxoPt8oXqjsYzjIs6lKpaiW6IVo3tjrx4__4lV21r5Yt2KPtIRt5AhLM9Z98p3576vjZ5pvLvZ_yOO60z8D5NwBysw1PqyV0"
+        "value": "AQEDAS3j2yEFECZ3AAABkrppVb8AAAGS3nXZv00AAM1R8DRFx97BahBUtIGP2-sQXSE2iVIRW4baXsE6njB6sHr77s7Z5wsqhCnHiaqbjQb2ITeaqZ_0gejVZFuz3XCdB12uKwl9Q6sJBb_ZNjk6-ySt"
     },
     {
         "domain": ".www.linkedin.com",
-        "expirationDate": 1736698768.080871,
+        "expirationDate": 1737480317.893448,
         "hostOnly": false,
         "httpOnly": false,
         "name": "JSESSIONID",
@@ -23,11 +23,11 @@
         "secure": true,
         "session": false,
         "storeId": null,
-        "value": "\"ajax:0663162558110969155\""
+        "value": "\"ajax:0589625310645032705\""
     },
     {
         "domain": ".www.linkedin.com",
-        "expirationDate": 1760458768.080705,
+        "expirationDate": 1761240317.89282,
         "hostOnly": false,
         "httpOnly": true,
         "name": "li_rm",
