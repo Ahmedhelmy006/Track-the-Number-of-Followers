@@ -3,8 +3,7 @@ name: Playwright Scraper
 on:
   workflow_dispatch:
   schedule:
-  #- cron: '0 */6 * * *'
-  - cron: '*/10 * * * *'
+    - cron: '*/10 * * * *'  # Adjust cron as needed
 
 jobs:
   run-scraper:
@@ -24,6 +23,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           playwright install
+
       - name: Run Playwright scraper
         run: |
           python core/main.py
+        env:
+          LINKEDIN_USERNAME: ${{ secrets.LINKEDIN_USERNAME }}
+          LINKEDIN_PASSWORD: ${{ secrets.LINKEDIN_PASSWORD }}
