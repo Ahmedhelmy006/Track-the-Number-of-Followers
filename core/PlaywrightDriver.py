@@ -1,5 +1,6 @@
 from playwright.sync_api import sync_playwright
 import os
+import json 
 
 class PlaywrightDriver:
     def __init__(self, cookies_file=None):
