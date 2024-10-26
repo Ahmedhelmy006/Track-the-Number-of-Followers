@@ -1,8 +1,10 @@
 import time as t
 from bs4 import BeautifulSoup
 import pandas as pd
+from CookiesCleaner import CookiesCleaner
 from LinkedIn import NormalPageView as NPV
 from LinkedIn import ProfileView as PV
+import json
 
 class InfoParser:
     def __init__(self, context):
@@ -10,17 +12,16 @@ class InfoParser:
 
     def scrap_info(self, link):
         page = self.context.new_page()
-        page.goto(link)
-        page.wait_for_timeout(2000)  # Wait for the page to load
-
-        html_content = page.content()  # Get the page source
+        page.goto(link, timeout=1200000000)
+        t.sleep(5)
+        html_content = page.content()
         soup = BeautifulSoup(html_content, 'html.parser')
         page.close()
         return self._parse_info(soup)
 
 class AccountInfoParser(InfoParser):
     def _parse_info(self, soup):
-        number_of_followers = soup.find('li', class_=PV.number_of_followers_class)
+        number_of_followers = soup.find('li', class_=PV.number_of_followers_class) 
         if number_of_followers:
             raw_text = number_of_followers.get_text(strip=True).replace('followers', '').strip()
             return FollowersTracker.clean_text(raw_text)
@@ -28,17 +29,34 @@ class AccountInfoParser(InfoParser):
 
 class PageInfoParser(InfoParser):
     def _parse_info(self, soup):
-        number_of_followers = soup.find('p', class_=NPV.number_of_followers_class)
+        number_of_followers = soup.find('p', class_=NPV.number_of_followers_class)  
         if number_of_followers:
             return FollowersTracker.clean_text(number_of_followers.get_text(strip=True))
         return 'Not Found'
-
 
 class FollowersTracker:
     def __init__(self, context, accounts_file, pages_file):
         self.context = context
         self.accounts = self.read_excel(accounts_file)
         self.pages = self.read_excel(pages_file)
+
+    def login(self):
+        username = os.getenv("LINKEDIN_USERNAME")
+        password = os.getenv("LINKEDIN_PASSWORD")
+        page = self.context.new_page()
+        page.goto("https://www.linkedin.com/login", timeout=60000)
+        page.fill('input[name="session_key"]', username)
+        page.fill('input[name="session_password"]', password)
+        page.click('button[type="submit"]')
+        page.wait_for_load_state("networkidle")
+
+        new_cookies = self.context.cookies()
+        cleaned_cookies = CookiesCleaner.clean_cookies(new_cookies)
+        with open('cookies.json', 'w') as file:
+            json.dump(cleaned_cookies, file)
+
+        page.close()
+        print("Login successful, cookies saved.")
 
     def read_excel(self, file_path):
         return pd.read_excel(file_path)
@@ -51,22 +69,29 @@ class FollowersTracker:
     def scrap_info(self):
         account_parser = AccountInfoParser(self.context)
         page_parser = PageInfoParser(self.context)
-
         account_links, page_links = self.get_links()
 
         followers_data = []
 
         for link in account_links:
-            info = account_parser.scrap_info(link)
+            info = self._scrap_with_retry(account_parser, link)
             followers_data.append(info)
             print(f"Account info: {info}")
 
         for link in page_links:
-            info = page_parser.scrap_info(link)
+            info = self._scrap_with_retry(page_parser, link)
             followers_data.append(info)
             print(f"Page info: {info}")
 
         return followers_data
+
+    def _scrap_with_retry(self, parser, link, retry=True):
+        info = parser.scrap_info(link)
+        if info == 'Not Found' and retry:
+            print("Info not found, attempting login...")
+            self.login(username= os.getenv("LINKEDIN_USERNAME"), os.getenv("LINKEDIN_PASSWORD"))
+            info = parser.scrap_info(link)
+        return info
 
     @staticmethod
     def clean_text(text):
