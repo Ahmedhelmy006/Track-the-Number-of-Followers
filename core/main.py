@@ -2,14 +2,11 @@ from PlaywrightDriver import PlaywrightDriver
 from core import FollowersTracker
 import GoogleFormsSubmitter
 import time
-import sys
-import os
 
 def run_scraper(): 
-    profile_dir = os.getenv('CHROME_PROFILE_DIR')
-    driver_instance = PlaywrightDriver(profile_dir=profile_dir)
+    driver_instance = PlaywrightDriver(cookies_file='json.json')
     context = driver_instance.initialize_driver()
-    tracker = FollowersTracker(context, r'input files/Accounts.xlsx', r'input files/Pages.xlsx')
+    tracker = FollowersTracker(context, r'input files\Accounts.xlsx', r'input files\Pages.xlsx')
 
     followers_data = tracker.scrap_info()
 
@@ -32,6 +29,6 @@ def run_scraper():
     form_submitter = GoogleFormsSubmitter.GoogleFormsSubmitter(form_url, form_fields)
     form_submitter.submit_data(mapped_data)
 
-while True:
-    run_scraper()
-    sys.exit()
+    driver_instance.close(context)
+
+run_scraper()
