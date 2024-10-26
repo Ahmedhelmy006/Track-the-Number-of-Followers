@@ -1,33 +1,29 @@
-name: Run Playwright with Chrome Profile
+name: Playwright Scraper
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/10 * * * *'
+  #- cron: '0 */6 * * *'
+  - cron: '*/10 * * * *'
 
 jobs:
   run-scraper:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set Playwright browser path
-        run: echo "PLAYWRIGHT_BROWSERS_PATH=0" >> $GITHUB_ENV
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
 
-      - name: Install Python dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Force install Chromium browser
+          playwright install
+      - name: Run Playwright scraper
         run: |
-          npx playwright install chromium
-
-      - name: Verify browser installation
-        run: |
-          ls -l /home/runner/.cache/ms-playwright/chromium* || echo "Chromium not found"
-
-      - name: Run scraper
-        run: python core/main.py
+          python core/main.py
