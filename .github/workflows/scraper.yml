@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0  # Ensure full history is fetched for commits
+          fetch-depth: 0  # Ensure full history is available for commits
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v2
@@ -28,12 +28,16 @@ jobs:
           playwright install
 
       - name: Run Playwright scraper
-        run: python core/main.py
+        run: |
+          python core/main.py
+        env:
+          LINKEDIN_USERNAME: ${{ secrets.LINKEDIN_USERNAME }}
+          LINKEDIN_PASSWORD: ${{ secrets.LINKEDIN_PASSWORD }}
 
-      - name: Add and commit updated cookies.json
+      - name: Commit and push updated cookies.json
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add cookies.json
           git commit -m "Update cookies.json"
-          git push origin HEAD:main
+          git push origin HEAD:main || echo "No changes to commit"
