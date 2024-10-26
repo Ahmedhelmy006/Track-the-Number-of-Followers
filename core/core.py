@@ -50,6 +50,7 @@ class FollowersTracker:
         page.fill('input[name="session_password"]', password)
         page.click('button[type="submit"]')
         page.wait_for_load_state("networkidle")
+        t.sleep(5)
 
         self._update_cookies_file()
 
