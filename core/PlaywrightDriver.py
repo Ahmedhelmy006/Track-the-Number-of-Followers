@@ -10,7 +10,7 @@ class PlaywrightDriver:
 
         context = playwright.chromium.launch_persistent_context(
             user_data_dir="./chrome-profile", 
-            headless=True
+            headless=True)
 
         if self.cookies_file and os.path.exists(self.cookies_file):
             with open(self.cookies_file, 'r') as file:
