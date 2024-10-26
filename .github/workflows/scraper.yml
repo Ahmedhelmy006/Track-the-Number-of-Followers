@@ -1,33 +1,28 @@
 name: Run Playwright with Chrome Profile
 
 on:
-  workflow_dispatch:  # Allow manual trigger
+  workflow_dispatch:  
   schedule:
-    - cron: '*/10 * * * *'  # Every 10 minutes
+    - cron: '*/10 * * * *'  
 
 jobs:
   run-scraper:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  
 
     steps:
-      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Install dependencies
-      - name: Install Python dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Step 3: Install Playwright browsers
       - name: Install Playwright browsers
         run: playwright install chromium
 
-      # Step 4: Ensure correct browser path
-      - name: Set Playwright browser path
-        run: echo "PLAYWRIGHT_BROWSERS_PATH=0" >> $GITHUB_ENV
-
-      # Step 5: Run the scraper
       - name: Run scraper
         run: python core/main.py
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: 0  # Install browsers locally in the project
+          CHROME_PROFILE_DIR: './chrome-profile'
