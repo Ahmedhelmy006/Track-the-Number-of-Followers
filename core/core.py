@@ -5,6 +5,7 @@ from CookiesCleaner import CookiesCleaner
 from LinkedIn import NormalPageView as NPV
 from LinkedIn import ProfileView as PV
 import json
+import os
 
 class InfoParser:
     def __init__(self, context):
