@@ -29,6 +29,4 @@ def run_scraper():
     form_submitter = GoogleFormsSubmitter.GoogleFormsSubmitter(form_url, form_fields)
     form_submitter.submit_data(mapped_data)
 
-    driver_instance.close(context)
-
 run_scraper()
