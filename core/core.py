@@ -132,6 +132,8 @@ class FollowersTracker:
         self.twitter_links = self.read_excel(twitter_file)
 
     def login(self, username, password):
+        username = os.getenv("LINKEDIN_USERNAME")
+        password = os.getenv("LINKEDIN_PASSWORD")
         page = self.context.new_page()
         page.goto("https://www.linkedin.com/login", timeout=60000)
         page.fill('input[name="session_key"]', username)
@@ -202,12 +204,25 @@ class FollowersTracker:
             print(f"Twitter info: {info}")
 
         return followers_data
+
     def _scrap_with_retry(self, parser, link, retry=True):
-        info = parser.scrap_info(link)
+        if isinstance(parser, Instagram):
+            info = parser.get_instagram_followers(link)
+        elif isinstance(parser, TwitterInfoParser):
+            info = parser.get_twitter_followers(link)
+        else:
+            info = parser.scrap_info(link)
+
         if info == 'Not Found' and retry:
             print("Info not found, attempting login...")
-            self.login()
-            info = parser.scrap_info(link)
+            self.login(username='morganfreemanek@gmail.com', password='CGfoxier60###')
+            if isinstance(parser, Instagram):
+                info = parser.get_instagram_followers(link)
+            elif isinstance(parser, TwitterInfoParser):
+                info = parser.get_twitter_followers(link)
+            else:
+                info = parser.scrap_info(link)
+        
         return info
 
     @staticmethod
