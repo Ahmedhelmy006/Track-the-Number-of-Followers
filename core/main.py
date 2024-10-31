@@ -11,10 +11,10 @@ def run_scraper():
         context,
         r'input files/Accounts.xlsx',
         r'input files/Pages.xlsx',
-        r'/input files/Newstellers.xlsx',
-        r'/input files/Youtube.xlsx',
-        r'/input files/Instagram.xlsx',
-        r'/input files/X.xlsx'
+        r'input files/Newstellers.xlsx',
+        r'input files/Youtube.xlsx',
+        r'input files/Instagram.xlsx',
+        r'input files/X.xlsx'
     )
 
     followers_data = tracker.scrap_info()
