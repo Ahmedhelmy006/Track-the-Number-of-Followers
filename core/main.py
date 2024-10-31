@@ -9,7 +9,7 @@ def run_scraper():
 
     tracker = FollowersTracker(
         context,
-        r'input files\Accounts.xlsx'
+        r'input files\Accounts.xlsx',
         r'input files\pages.xlsx',
         r'/input files\Newstellers.xlsx',
         r'/input files\Youtube.xlsx',
