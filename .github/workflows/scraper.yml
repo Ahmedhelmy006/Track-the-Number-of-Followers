@@ -2,8 +2,8 @@ name: Playwright Scraper
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '*/10 * * * *'  # Adjust cron as needed
+  #schedule:
+  #  - cron: '*/10 * * * *'  # Adjust cron as needed
 
 jobs:
   run-scraper:
