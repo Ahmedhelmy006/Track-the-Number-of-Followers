@@ -2,8 +2,8 @@ name: Playwright Scraper
 
 on:
   workflow_dispatch:
-  #schedule:
-  #  - cron: '*/10 * * * *'  # Adjust cron as needed
+  # schedule:
+  #   - cron: '*/10 * * * *'  # Adjust cron as needed
 
 jobs:
   run-scraper:
@@ -19,14 +19,14 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable  # Install Google Chrome
+          sudo apt-get install -y google-chrome-stable xvfb  # Install Google Chrome and xvfb
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           playwright install chromium
 
       - name: Run Playwright scraper
         run: |
-          python core/main.py
+          xvfb-run -a python core/main.py  # Run script in non-headless mode using xvfb
         env:
           LINKEDIN_USERNAME: ${{ secrets.LINKEDIN_USERNAME }}
           LINKEDIN_PASSWORD: ${{ secrets.LINKEDIN_PASSWORD }}
