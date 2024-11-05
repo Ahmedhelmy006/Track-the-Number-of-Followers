@@ -9,7 +9,7 @@ class PlaywrightDriver:
     def initialize_driver(self):
         playwright = sync_playwright().start()
 
-        context = playwright.chromium.launch_persistent_context(
+        context = playwright.chrome.launch_persistent_context(
             user_data_dir="./chrome-profile", 
             headless=True)
 
