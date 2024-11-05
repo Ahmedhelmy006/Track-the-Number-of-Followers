@@ -12,7 +12,7 @@ class PlaywrightDriver:
 
         context = playwright.chromium.launch_persistent_context(
             user_data_dir="./chrome-profile",
-            headless=True,
+            headless=False,
             executable_path=self.chrome_path 
         )
 
