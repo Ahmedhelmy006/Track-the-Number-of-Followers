@@ -231,5 +231,8 @@ class FollowersTracker:
         if text:
             text = text.replace(",", "")
             text = text.split(' ')[0]
-            return int(text)
+            try:
+                return int(text)
+            except ValueError:
+                return text
         return None
