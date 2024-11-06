@@ -1,26 +1,27 @@
 from playwright.sync_api import sync_playwright
 import os
+import json
 
 class PlaywrightDriver:
-    def __init__(self, chrome_path="/usr/bin/google-chrome"):  # Ensure this is the path to Google Chrome, not Chromium
-        # Path to the extracted profile directory
-        self.user_data_dir = "./chrome-profile"
+    def __init__(self, cookies_file=None, chrome_path="/usr/bin/google-chrome"):
+        self.cookies_file = cookies_file
         self.chrome_path = chrome_path
 
     def initialize_driver(self):
         playwright = sync_playwright().start()
 
         context = playwright.chromium.launch_persistent_context(
-            user_data_dir=self.user_data_dir,  
-            headless=False,                   
-            executable_path=self.chrome_path   # Google Chrome executable path
+            user_data_dir="./chrome-profile",
+            headless=False,
+            executable_path=self.chrome_path 
         )
 
-        print("Chrome launched with persistent profile data.")
+        if self.cookies_file and os.path.exists(self.cookies_file):
+            with open(self.cookies_file, 'r') as file:
+                cookies = json.load(file)
+                context.add_cookies(cookies)
 
         return context
 
     def close(self, context):
-        # Close the browser context, which saves any updates to the profile
         context.close()
-        print("Chrome context closed and session saved.")
