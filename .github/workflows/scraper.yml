@@ -13,28 +13,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0  # Ensure full history is available for commits
+          fetch-depth: 0
 
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable xvfb  # Install Google Chrome and xvfb
+          sudo apt-get install -y google-chrome-stable xvfb unzip
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           playwright install chromium
 
+      - name: Extract Chrome Profile
+        run: |
+          unzip profile3.zip -d ./chrome-profile
+
       - name: Run Playwright scraper
         run: |
-          xvfb-run -a python core/main.py  # Run script in non-headless mode using xvfb
+          xvfb-run -a python core/main.py
         env:
           LINKEDIN_USERNAME: ${{ secrets.LINKEDIN_USERNAME }}
           LINKEDIN_PASSWORD: ${{ secrets.LINKEDIN_PASSWORD }}
-
-      - name: Commit and push updated cookies.json
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add cookies.json
-          git commit -m "Update cookies.json"
-          git push origin HEAD:master || echo "No changes to commit"
