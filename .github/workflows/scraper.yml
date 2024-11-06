@@ -18,14 +18,24 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable xvfb unzip
+          sudo apt-get install -y google-chrome-stable xvfb p7zip-full
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           playwright install chromium
 
+      - name: Verify Profile3.7z exists
+        run: |
+          ls -l Profile3.7z
+          file Profile3.7z
+
       - name: Extract Chrome Profile
         run: |
-          unzip Profile3.zip -d ./chrome-profile
+          if [[ -f "Profile3.7z" ]]; then
+            7z x Profile3.7z -o./chrome-profile
+          else
+            echo "Profile3.7z not found!"
+            exit 1
+          fi
 
       - name: Run Playwright scraper
         run: |
