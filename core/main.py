@@ -5,7 +5,7 @@ import time as t
 
 def run_scraper():
     driver = PlaywrightDriver()
-    context = driver.initialize_driver()
+    context = driver.initialize_driver(cookies_file='cookies.json')
 
     tracker = FollowersTracker(
         context,
