@@ -2,7 +2,7 @@ from playwright.sync_api import sync_playwright
 import os
 
 class PlaywrightDriver:
-    def __init__(self, chrome_path="/usr/bin/google-chrome"):
+    def __init__(self, chrome_path="/usr/bin/google-chrome"):  # Ensure this is the path to Google Chrome, not Chromium
         # Path to the extracted profile directory
         self.user_data_dir = "./chrome-profile"
         self.chrome_path = chrome_path
@@ -13,7 +13,7 @@ class PlaywrightDriver:
         context = playwright.chromium.launch_persistent_context(
             user_data_dir=self.user_data_dir,  
             headless=False,                   
-            executable_path=self.chrome_path   
+            executable_path=self.chrome_path   # Google Chrome executable path
         )
 
         print("Chrome launched with persistent profile data.")
