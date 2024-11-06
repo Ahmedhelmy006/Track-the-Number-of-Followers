@@ -25,7 +25,7 @@ jobs:
 
       - name: Extract Chrome Profile
         run: |
-          unzip Profile 3.zip -d ./chrome-profile
+          unzip Profile3.zip -d ./chrome-profile
 
       - name: Run Playwright scraper
         run: |
